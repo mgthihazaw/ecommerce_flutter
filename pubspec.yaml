@@ -52,6 +52,12 @@ flutter:
     - assets/carousels/image3.jpg
     - assets/carousels/image4.jpg
     - assets/carousels/image5.jpg
+    - assets/images/phone.png
+    - assets/images/laptop.png
+    - assets/images/head.png
+    - assets/images/tshirt.jpg
+    - assets/images/glass.png
+    - assets/images/clock.png
     
 
   # An image asset can refer to one or more resolution-specific "variants", see

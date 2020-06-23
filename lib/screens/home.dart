@@ -1,4 +1,6 @@
 
+import 'package:ecommerce/widgets/category.dart';
+import 'package:ecommerce/widgets/components/custom-title.dart';
 import 'package:flutter/material.dart';
 import '../widgets/app-drawer.dart';
 import '../widgets/carousel.dart';
@@ -30,7 +32,12 @@ class _HomeState extends State<Home> {
       ),
       drawer: AppDrawer(),
       body: SingleChildScrollView(child: Column(children: <Widget>[
-        Carousel()
+        Carousel(),
+      
+        
+        Category(),
+       
+
       ],),)
       
     );

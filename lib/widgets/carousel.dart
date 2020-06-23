@@ -73,10 +73,10 @@ class _CarouselState extends State<Carousel> {
                 width: _current == index ?10 :5,
                 height: _current == index ?10 :5,
                 decoration: BoxDecoration(
-                    border: Border.all(color: Theme.of(context).primaryColor),
+                    border: Border.all(color: Theme.of(context).accentColor),
                     shape: BoxShape.circle,
                     color: _current == index
-                        ? Theme.of(context).primaryColor
+                        ? Theme.of(context).accentColor
                         : null),
               );
             }),
