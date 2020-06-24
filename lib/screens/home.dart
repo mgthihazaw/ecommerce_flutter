@@ -4,6 +4,7 @@ import 'package:ecommerce/widgets/components/custom-title.dart';
 import 'package:flutter/material.dart';
 import '../widgets/app-drawer.dart';
 import '../widgets/carousel.dart';
+import './product-list.dart';
 
 
 class Home extends StatefulWidget {
@@ -31,14 +32,20 @@ class _HomeState extends State<Home> {
         ],
       ),
       drawer: AppDrawer(),
-      body: SingleChildScrollView(child: Column(children: <Widget>[
+      body: ListView(children: <Widget>[
         Carousel(),
-      
-        
         Category(),
+        CustomTitle(title: "Recent Products",),
+        Container(
+          width: double.infinity,
+          height: 400,
+          decoration: BoxDecoration(color: Colors.grey[100]),
+          child: ProductList()),
+         
        
 
-      ],),)
+      ],),
+      
       
     );
   }

@@ -34,6 +34,11 @@ class MyApp extends StatelessWidget {
         primarySwatch:CustomColor.primaryColor,
         accentColor: CustomColor.secondaryColor,
         visualDensity: VisualDensity.adaptivePlatformDensity,
+        textTheme: ThemeData.light().textTheme.copyWith(
+          headline1: TextStyle(color: Colors.black,fontSize: 15,fontWeight: FontWeight.w500),
+          headline2: TextStyle(color: CustomColor.secondaryColor,fontSize: 16,fontWeight: FontWeight.w500),
+           headline3: TextStyle(color: Colors.white,fontSize: 16,fontWeight: FontWeight.w500)
+        )
       ),
       home: Home(),
     );

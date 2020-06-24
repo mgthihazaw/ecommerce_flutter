@@ -64,7 +64,7 @@ class _CarouselState extends State<Carousel> {
           }).toList(),
         ),
         Container(
-          decoration: BoxDecoration(color: Colors.grey[300]),
+          decoration: BoxDecoration(color: Theme.of(context).primaryColor),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: mapSlide<Widget>(_imageList, (index, url) {
@@ -73,7 +73,7 @@ class _CarouselState extends State<Carousel> {
                 width: _current == index ?10 :5,
                 height: _current == index ?10 :5,
                 decoration: BoxDecoration(
-                    border: Border.all(color: Theme.of(context).accentColor),
+                    border: Border.all(color: Colors.white),
                     shape: BoxShape.circle,
                     color: _current == index
                         ? Theme.of(context).accentColor
