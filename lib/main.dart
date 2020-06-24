@@ -1,3 +1,4 @@
+import './screens/product-detail.dart';
 import 'package:flutter/material.dart';
 import './screens/home.dart';
 import './utils/custom-color.dart';
@@ -40,6 +41,9 @@ class MyApp extends StatelessWidget {
            headline3: TextStyle(color: Colors.white,fontSize: 16,fontWeight: FontWeight.w500)
         )
       ),
+      routes: {
+        "/product-detail" : (ctx) => ProductDetail()
+      },
       home: Home(),
     );
   }
