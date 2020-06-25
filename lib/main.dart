@@ -1,3 +1,5 @@
+import 'package:ecommerce/screens/cart.dart';
+
 import './screens/product-detail.dart';
 import 'package:flutter/material.dart';
 import './screens/home.dart';
@@ -42,7 +44,8 @@ class MyApp extends StatelessWidget {
         )
       ),
       routes: {
-        "/product-detail" : (ctx) => ProductDetail()
+        "/product-detail" : (ctx) => ProductDetail(),
+        "/cart" : (ctx) => Cart()
       },
       home: Home(),
     );

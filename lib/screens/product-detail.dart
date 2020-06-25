@@ -36,7 +36,9 @@ class ProductDetail extends StatelessWidget {
             ),
             IconButton(
               icon: Icon(Icons.shopping_cart),
-              onPressed: () {},
+              onPressed: () {
+                Navigator.of(context).pushNamed("/cart");
+              },
               color: Theme.of(context).accentColor,
             )
           ],
