@@ -42,6 +42,42 @@ class _ProductListState extends State<ProductList> {
       "image":
           "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQt1bbxxI7tHNrFh96cOa_QtVVjVZ003G_zCg&usqp=CAU",
       "price": 30000,
+    },
+    {
+      "title": "Tshirt",
+      "image":
+          "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSgtgAl2H4lbF3fWF7PMhplv4imCnZh0Lqlcw&usqp=CAU",
+      "price": 5000,
+    },
+    {
+      "title": "Shoe",
+      "image":
+          "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSAndsf_sCgMaGU0ZywjEdky3qINFeLfyAT4g&usqp=CAU",
+      "price": 10000,
+    },
+    {
+      "title": "Bag",
+      "image":
+          "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSLlD-SZQosSNabOqO-ElglZQlNMwCTQf3QxQ&usqp=CAU",
+      "price": 5000,
+    },
+    {
+      "title": "Tucker Bag",
+      "image":
+          "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQkjzD6f8l77i4K1axA2D29EC7OwAVKQw314w&usqp=CAU",
+      "price": 5000,
+    },
+    {
+      "title": "Kid Cycle",
+      "image":
+          "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQxJgCM8QYbtKKjHmjwTWWTcS8Ou_BxnmS1fQ&usqp=CAU",
+      "price": 5000,
+    },
+    {
+      "title": "Eye Glass",
+      "image":
+          "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQt1bbxxI7tHNrFh96cOa_QtVVjVZ003G_zCg&usqp=CAU",
+      "price": 30000,
     }
   ];
   @override
