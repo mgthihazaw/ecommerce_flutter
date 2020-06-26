@@ -1,9 +1,14 @@
-import 'package:ecommerce/screens/cart.dart';
-
-import './screens/product-detail.dart';
+import 'package:ecommerce/providers/home-provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import './screens/cart.dart';
 import './screens/home.dart';
+import './screens/product-detail.dart';
+
+
 import './utils/custom-color.dart';
+
 void main() {
   runApp(MyApp());
 }
@@ -31,7 +36,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     
     
-    return MaterialApp(
+    return MultiProvider(providers: [
+          ChangeNotifierProvider.value(value: HomeProvider())
+    ],
+    child: MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch:CustomColor.primaryColor,
@@ -48,6 +56,7 @@ class MyApp extends StatelessWidget {
         "/cart" : (ctx) => Cart()
       },
       home: Home(),
+    ),
     );
   }
 }

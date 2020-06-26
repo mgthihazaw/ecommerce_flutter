@@ -1,48 +1,57 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../providers/home-provider.dart';
+import '../providers/category.dart' as pro;
 
 class Category extends StatelessWidget {
+
+  
   @override
   Widget build(BuildContext context) {
+    List<pro.Category> categories = Provider.of<HomeProvider>(context).categories;
     return Container(
       height: 90,
       width: double.infinity,
       padding: EdgeInsets.all(10),
       // decoration: BoxDecoration(color: Colors.grey[300]),
-      child: ListView(
+      child: ListView.builder(
+        itemCount: categories.length,
         scrollDirection: Axis.horizontal,
-        children: <Widget>[
-          CategoryItem(
-            title: "Phone",
-            image: "assets/images/phone.png",
-          ),
-          CategoryItem(
-            title: "Laptop",
-            image: "assets/images/laptop.png",
-          ),
-          CategoryItem(
-            title: "Clock",
-            image: "assets/images/clock.png",
-          ),
-          CategoryItem(
-            title: "Tshirt",
-            image: "assets/images/tshirt.jpg",
-          ),
-          CategoryItem(
-            title: "glass",
-            image: "assets/images/glass.png",
-          ),
+        itemBuilder: (ctx,index)=> CategoryItem(id: categories[index].id,title: categories[index].title,image: categories[index].image,),
+        // children: <Widget>[
+        //   CategoryItem(
+        //     title: "Phone",
+        //     image: "assets/images/phone.png",
+        //   ),
+        //   CategoryItem(
+        //     title: "Laptop",
+        //     image: "assets/images/laptop.png",
+        //   ),
+        //   CategoryItem(
+        //     title: "Clock",
+        //     image: "assets/images/clock.png",
+        //   ),
+        //   CategoryItem(
+        //     title: "Tshirt",
+        //     image: "assets/images/tshirt.jpg",
+        //   ),
+        //   CategoryItem(
+        //     title: "glass",
+        //     image: "assets/images/glass.png",
+        //   ),
           
-        ],
+        // ],
       ),
     );
   }
 }
 
 class CategoryItem extends StatelessWidget {
+  final int id;
   final String image;
   final String title;
-  CategoryItem({@required this.image, @required this.title});
+  CategoryItem({@required this.id,@required this.image, @required this.title});
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -61,7 +70,7 @@ class CategoryItem extends StatelessWidget {
             children: <Widget>[
               ClipRRect(
                   borderRadius: BorderRadius.circular(50),
-                  child: Image.asset(
+                  child: Image.network(
                     image,
                     width: 35,
                     height: 35,
