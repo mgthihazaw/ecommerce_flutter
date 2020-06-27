@@ -75,7 +75,7 @@ class SimilarProduct extends StatelessWidget {
                       children: <Widget>[
                         Expanded(
                           child: FlatButton(
-                            color: Theme.of(context).primaryColor,
+                            color: Theme.of(context).primaryColor.withOpacity(0.7),
                             child: FittedBox(
                                 child: Text("Buy Now",
                                     style:

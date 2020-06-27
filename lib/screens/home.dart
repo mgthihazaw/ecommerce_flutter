@@ -24,7 +24,7 @@ class _HomeState extends State<Home> {
         _isLoading = false;
         // });
 
-        print("SUCCS");
+        print("SUCCESS");
       }).catchError((err) {
         _isLoading = false;
       });

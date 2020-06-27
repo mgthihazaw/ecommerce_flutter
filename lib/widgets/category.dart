@@ -5,20 +5,23 @@ import '../providers/home-provider.dart';
 import '../providers/category.dart' as pro;
 
 class Category extends StatelessWidget {
-
-  
   @override
   Widget build(BuildContext context) {
-    List<pro.Category> categories = Provider.of<HomeProvider>(context).categories;
+    List<pro.Category> categories =
+        Provider.of<HomeProvider>(context).categories;
     return Container(
       height: 90,
       width: double.infinity,
-      padding: EdgeInsets.all(10),
+      padding: EdgeInsets.symmetric(vertical:10),
       // decoration: BoxDecoration(color: Colors.grey[300]),
       child: ListView.builder(
         itemCount: categories.length,
         scrollDirection: Axis.horizontal,
-        itemBuilder: (ctx,index)=> CategoryItem(id: categories[index].id,title: categories[index].title,image: categories[index].image,),
+        itemBuilder: (ctx, index) => CategoryItem(
+          id: categories[index].id,
+          title: categories[index].title,
+          image: categories[index].image,
+        ),
         // children: <Widget>[
         //   CategoryItem(
         //     title: "Phone",
@@ -40,7 +43,7 @@ class Category extends StatelessWidget {
         //     title: "glass",
         //     image: "assets/images/glass.png",
         //   ),
-          
+
         // ],
       ),
     );
@@ -51,7 +54,7 @@ class CategoryItem extends StatelessWidget {
   final int id;
   final String image;
   final String title;
-  CategoryItem({@required this.id,@required this.image, @required this.title});
+  CategoryItem({@required this.id, @required this.image, @required this.title});
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -68,21 +71,46 @@ class CategoryItem extends StatelessWidget {
           // ]),
           child: Column(
             children: <Widget>[
-              ClipRRect(
+              Container(
+                
+                width: 35,
+                height: 35,
+                decoration: BoxDecoration(
+                  color: Colors.white,
                   borderRadius: BorderRadius.circular(50),
-                  child: Image.network(
-                    image,
-                    width: 35,
-                    height: 35,
-                    fit: BoxFit.cover,
-                  )),
-              SizedBox(height: 5),
-              Text(
-                title,
-                style: TextStyle(
-                    color: Colors.grey,
-                    fontSize: 15,
-                    fontWeight: FontWeight.w600),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Theme.of(context).accentColor.withOpacity(0.3),
+                      spreadRadius: 2,
+                      blurRadius: 4,
+                      offset: Offset(0, 3), // changes position of shadow
+                    ),
+                  ],
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(5.0),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(50),
+                    child: Image.network(
+                      image,
+                      width: 35,
+                      height: 35,
+                      fit: BoxFit.cover,
+                    )),
+                ),
+             
+              ),
+               SizedBox(height: 5),
+              FittedBox(
+                child: Text(
+                  title,
+                  
+                  style: TextStyle(
+                      color: Colors.grey,
+                      fontSize: 12,
+                      
+                      fontWeight: FontWeight.w600),
+                ),
               )
             ],
           )),

@@ -94,7 +94,7 @@ class _ProductListState extends State<ProductList> {
           return InkWell(
             child: Card(
               // color: Theme.of(context).primaryColor,
-              shadowColor: Theme.of(context).primaryColor,
+              shadowColor: Theme.of(context).accentColor.withOpacity(0.3),
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(5)),
               elevation: 5.0,
@@ -128,7 +128,7 @@ class _ProductListState extends State<ProductList> {
                     children: <Widget>[
                       Expanded(
                         child: FlatButton(
-                          color: Theme.of(context).primaryColor,
+                          color: Theme.of(context).primaryColor.withOpacity(0.7),
                           child: FittedBox(
                               child: Text("Buy Now",
                                   style:
