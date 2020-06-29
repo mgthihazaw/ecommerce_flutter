@@ -1,11 +1,13 @@
+
 import 'package:provider/provider.dart';
-import 'package:ecommerce/providers/home-provider.dart';
+// import 'package:ecommerce/providers/home-provider.dart';
 import 'package:ecommerce/widgets/category.dart';
 import 'package:ecommerce/widgets/components/custom-title.dart';
 import 'package:flutter/material.dart';
 import '../widgets/app-drawer.dart';
 import '../widgets/carousel.dart';
 import './product-list.dart';
+import '../providers/category-provider.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -19,7 +21,7 @@ class _HomeState extends State<Home> {
   @override
   void didChangeDependencies() {
     if (_isInit) {
-      Provider.of<HomeProvider>(context).fetchData().then((res) {
+      Provider.of<CategoryProvider>(context).fetchData().then((res) {
         // setState(() {
         _isLoading = false;
         // });

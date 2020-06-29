@@ -1,14 +1,14 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../providers/home-provider.dart';
-import '../providers/category.dart' as pro;
+import '../providers/category-provider.dart';
+import '../models/category.dart' as pro;
 
 class Category extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List<pro.Category> categories =
-        Provider.of<HomeProvider>(context).categories;
+        Provider.of<CategoryProvider>(context).categories;
     return Container(
       height: 90,
       width: double.infinity,

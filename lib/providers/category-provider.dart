@@ -1,24 +1,32 @@
 import 'package:flutter/foundation.dart';
 import 'dart:convert';
-import '../models/category.dart' as pro;
-import 'package:http/http.dart' as http;
+import '../models/category.dart' as model;
+import '../services/category-service.dart';
 
-class HomeProvider with ChangeNotifier {
-  List<pro.Category> _category = [];
+class CategoryProvider with ChangeNotifier {
+  CategoryService _categoryService;
+  List<model.Category> _category = [];
+  
+
+  CategoryProvider(){
+   _categoryService = CategoryService();
+  }
+  
 
   Future<void> fetchData() async {
     try {
-      var response = await http.get("http://192.168.10.26:8000/api/category");
+      print("DATA");
+      var response =  await _categoryService.getCategory();
       var responseData = json.decode(response.body);
 
       var categoryData = responseData['data'];
-      print(categoryData);
+      // print(categoryData);
       
 
-       List<pro.Category> loadCategory = [];
+       List<model.Category> loadCategory = [];
       categoryData.forEach(( element) {
         
-       loadCategory.add(pro.Category(
+       loadCategory.add(model.Category(
             id: element['id'],
             title: element['title'],
             image: element['image']));
@@ -32,7 +40,7 @@ class HomeProvider with ChangeNotifier {
     }
   }
 
-  List<pro.Category> get categories{
+  List<model.Category> get categories{
     print("DATA");
     print(_category);
     return [..._category];
