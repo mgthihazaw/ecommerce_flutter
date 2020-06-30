@@ -15,7 +15,7 @@ class CategoryProvider with ChangeNotifier {
 
   Future<void> fetchData() async {
     try {
-      print("DATA");
+      // print("DATA");
       var response =  await _categoryService.getCategory();
       var responseData = json.decode(response.body);
 
@@ -32,17 +32,18 @@ class CategoryProvider with ChangeNotifier {
             image: element['image']));
       });
       _category = loadCategory;
-      print(_category);
+      // print(_category);
       notifyListeners();
         
     } catch (e) {
+      print("Errro");
       print(e);
     }
   }
 
   List<model.Category> get categories{
-    print("DATA");
-    print(_category);
+    // print("DATA");
+    // print(_category);
     return [..._category];
   }
 }

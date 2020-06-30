@@ -4,6 +4,6 @@ class Category{
   final String title;
   final String image;
 
-  Category({this.id,this.title,this.image});
+  Category({@required this.id,@required this.title,@required this.image});
 
 }

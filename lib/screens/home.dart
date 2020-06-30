@@ -1,4 +1,6 @@
-
+import 'dart:convert';
+import 'package:ecommerce/providers/product-provider.dart';
+import 'package:ecommerce/services/slider-service.dart';
 import 'package:provider/provider.dart';
 // import 'package:ecommerce/providers/home-provider.dart';
 import 'package:ecommerce/widgets/category.dart';
@@ -17,23 +19,27 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   bool _isLoading = false;
   bool _isInit = true;
+  SliderService _sliderService = new SliderService();
+  var _sliders;
 
   @override
-  void didChangeDependencies() {
+  void didChangeDependencies() async{
     if (_isInit) {
-      Provider.of<CategoryProvider>(context).fetchData().then((res) {
-        // setState(() {
-        _isLoading = false;
-        // });
-
-        print("SUCCESS");
-      }).catchError((err) {
-        _isLoading = false;
-      });
+      _isLoading= true;
+     await Provider.of<CategoryProvider>(context,listen: false).fetchData();
+     await Provider.of<ProductProvider>(context,listen: false).getProducts();
+     await getSliders();
+     _isLoading = false;
     }
     _isInit = false;
 
     super.didChangeDependencies();
+  }
+
+  Future<void> getSliders() async{
+   var response =await _sliderService.getSlider();
+   var data = json.decode(response.body);
+   _sliders = data["data"];
   }
 
   @override
@@ -57,11 +63,9 @@ class _HomeState extends State<Home> {
         ],
       ),
       drawer: AppDrawer(),
-      body: _isLoading
-          ? Center(child: CircularProgressIndicator())
-          : ListView(
+      body: _isLoading ? Center(child: CircularProgressIndicator()): ListView(
               children: <Widget>[
-                Carousel(),
+                Carousel(_sliders),
                 Category(),
                 CustomTitle(
                   title: "Recent Products",

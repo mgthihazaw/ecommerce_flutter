@@ -28,7 +28,7 @@ class ProductDetail extends StatelessWidget {
     return Scaffold(
         appBar: AppBar(
           // backgroundColor: Colors.white,
-          title: Text(data["title"]),
+          title: Text(data["name"]),
           actions: <Widget>[
             IconButton(
               icon: Icon(Icons.search),

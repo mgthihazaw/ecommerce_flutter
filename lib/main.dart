@@ -1,4 +1,5 @@
 import 'package:ecommerce/providers/category-provider.dart';
+import 'package:ecommerce/providers/product-provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -37,7 +38,8 @@ class MyApp extends StatelessWidget {
     
     
     return MultiProvider(providers: [
-          ChangeNotifierProvider.value(value: CategoryProvider())
+          ChangeNotifierProvider.value(value: CategoryProvider()),
+          ChangeNotifierProvider.value(value: ProductProvider())
     ],
     child: MaterialApp(
       title: 'Flutter Demo',

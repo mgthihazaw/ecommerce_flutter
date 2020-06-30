@@ -3,24 +3,26 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:carousel_slider/carousel_options.dart';
 
 class Carousel extends StatefulWidget {
+final _sliderList;
+  Carousel(this._sliderList);
   @override
   _CarouselState createState() => _CarouselState();
 }
 
 class _CarouselState extends State<Carousel> {
   int _current;
-  List _imageList = [
-    "assets/carousels/image1.jpg",
-    "assets/carousels/image2.jpg",
-    "assets/carousels/image3.jpg",
-    "assets/carousels/image4.jpg",
-    "assets/carousels/image5.jpg",
-  ];
+  // List _imageList = [
+  //   "assets/carousels/image1.jpg",
+  //   "assets/carousels/image2.jpg",
+  //   "assets/carousels/image3.jpg",
+  //   "assets/carousels/image4.jpg",
+  //   "assets/carousels/image5.jpg",
+  // ];
   List<T> mapSlide<T>(List list, handler) {
     List<T> result = [];
     int i = 0;
     list.forEach((value) {
-      result.add(handler(i, value));
+      result.add(handler(i, value["image"]));
       i++;
     });
     return result;
@@ -50,7 +52,7 @@ class _CarouselState extends State<Carousel> {
                   _current = index;
                 });
               }),
-          items: _imageList.map((i) {
+          items: widget._sliderList.map<Widget>((i) {
             return Builder(
               builder: (BuildContext context) {
                 return Container(
@@ -58,7 +60,7 @@ class _CarouselState extends State<Carousel> {
                     margin: EdgeInsets.symmetric(horizontal: 5.0),
                     decoration:
                         BoxDecoration(color: Theme.of(context).accentColor),
-                    child: Image.asset(i, fit: BoxFit.cover));
+                    child: Image.network(i["image"], fit: BoxFit.cover));
               },
             );
           }).toList(),
@@ -67,7 +69,7 @@ class _CarouselState extends State<Carousel> {
           decoration: BoxDecoration(color: Theme.of(context).primaryColor),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: mapSlide<Widget>(_imageList, (index, url) {
+            children: mapSlide<Widget>(widget._sliderList, (index, url) {
               return Container(
                 margin: EdgeInsets.all(7),
                 width: _current == index ?10 :5,
