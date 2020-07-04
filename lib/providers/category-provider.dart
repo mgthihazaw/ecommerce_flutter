@@ -6,44 +6,36 @@ import '../services/category-service.dart';
 class CategoryProvider with ChangeNotifier {
   CategoryService _categoryService;
   List<model.Category> _category = [];
-  
 
-  CategoryProvider(){
-   _categoryService = CategoryService();
+  CategoryProvider() {
+    _categoryService = CategoryService();
   }
-  
-
+/// ***************** Api service *********************/
   Future<void> fetchData() async {
     try {
       // print("DATA");
-      var response =  await _categoryService.getCategory();
-      var responseData = json.decode(response.body);
-
-      var categoryData = responseData['data'];
-      // print(categoryData);
-      
-
-       List<model.Category> loadCategory = [];
-      categoryData.forEach(( element) {
-        
-       loadCategory.add(model.Category(
-            id: element['id'],
-            title: element['title'],
-            image: element['image']));
-      });
-      _category = loadCategory;
-      // print(_category);
+      var response = await _categoryService.getCategory();
+      var data = json.decode(response.body);
+      _category = _createCategoryList(data);
       notifyListeners();
-        
     } catch (e) {
       print("Errro");
       print(e);
     }
   }
-
-  List<model.Category> get categories{
-    // print("DATA");
-    // print(_category);
+/// ***************** Getters *********************/
+  List<model.Category> get categories {
     return [..._category];
+  }
+
+/// ***************** utility methods *********************/
+  List<model.Category> _createCategoryList(Map data) {
+    List<model.Category> list = [];
+    List productData = data["data"];
+    productData.forEach((item) {
+      list.add(model.Category(
+          id: item['id'], title: item['title'], image: item['image']));
+    });
+    return list;
   }
 }

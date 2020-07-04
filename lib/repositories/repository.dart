@@ -1,8 +1,44 @@
+import 'dart:io';
+
+import 'package:ecommerce/repositories/db-connection.dart';
 import 'package:http/http.dart' as http;
+import 'package:sqflite/sqflite.dart' as sql;
 class Repository{
   final String baseUrl = "http://192.168.10.26:8000/api";
 
   Future get(String api) async{
-    return http.get(baseUrl+api);
+    // try{
+      print("NET");
+      return http.get(baseUrl+api);
+    // }on SocketException{
+    //   print("Network Error");
+    // }
+    // print("FF");
+  }
+
+
+  Future saveLocal(String table,Map data) async{
+
+    var db = await DBConnection.initDB();
+    
+    return await db.insert(table, data,conflictAlgorithm: sql.ConflictAlgorithm.replace);
+
+
+  }
+  updateLocal(table, columnName, data) async {
+    var conn = await DBConnection.initDB();
+    return await conn.update(table, data, where: '$columnName =?', whereArgs: [data['productId']]);
+  }
+
+  getLocalByCondition(table, columnName, conditionalValue) async {
+    var conn = await DBConnection.initDB();
+    return await conn.rawQuery('SELECT * FROM $table WHERE $columnName=?', ['$conditionalValue']);
+  }
+  countLocal(table) async{
+    
+    var conn = await DBConnection.initDB();
+   var  data= await conn.rawQuery('SELECT COUNT(*) FROM $table');
+   print(data[0]["COUNT(*)"]);
+   return data[0]["COUNT(*)"];
   }
 }

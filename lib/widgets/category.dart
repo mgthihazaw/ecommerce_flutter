@@ -115,21 +115,23 @@ class CategoryItem extends StatelessWidget {
             ],
           )),
       onTap: () {
-        showDialog(
-            context: context,
-            builder: (ctx) => AlertDialog(
-                  elevation: 5,
-                  title: Text("Message"),
-                  content: Text("Products of category are unavaiable"),
-                  actions: <Widget>[
-                    FlatButton(
-                      child: Text("OK"),
-                      onPressed: () {
-                        Navigator.of(ctx).pop();
-                      },
-                    )
-                  ],
-                ));
+
+        Navigator.of(context).pushNamed('/category-product',arguments: {"id":id,"title":title});
+        // showDialog(
+        //     context: context,
+        //     builder: (ctx) => AlertDialog(
+        //           elevation: 5,
+        //           title: Text("Message"),
+        //           content: Text("Products of category are unavaiable"),
+        //           actions: <Widget>[
+        //             FlatButton(
+        //               child: Text("OK"),
+        //               onPressed: () {
+        //                 Navigator.of(ctx).pop();
+        //               },
+        //             )
+        //           ],
+        //         ));
       },
     );
   }

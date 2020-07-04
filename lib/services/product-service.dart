@@ -8,4 +8,8 @@ class ProductService{
   Future getProducts() async{
     return  _repository.get("/products");
   }
+
+  Future getProductByCategory(id){
+    return  _repository.get("/category/$id/products");
+  }
 }

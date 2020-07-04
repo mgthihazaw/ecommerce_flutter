@@ -1,5 +1,7 @@
+import 'package:ecommerce/providers/cart-provider.dart';
 import 'package:ecommerce/providers/category-provider.dart';
 import 'package:ecommerce/providers/product-provider.dart';
+import 'package:ecommerce/screens/products/category-product.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -39,7 +41,8 @@ class MyApp extends StatelessWidget {
     
     return MultiProvider(providers: [
           ChangeNotifierProvider.value(value: CategoryProvider()),
-          ChangeNotifierProvider.value(value: ProductProvider())
+          ChangeNotifierProvider.value(value: ProductProvider()),
+          ChangeNotifierProvider.value(value: CartProvider())
     ],
     child: MaterialApp(
       title: 'Flutter Demo',
@@ -55,7 +58,8 @@ class MyApp extends StatelessWidget {
       ),
       routes: {
         "/product-detail" : (ctx) => ProductDetail(),
-        "/cart" : (ctx) => Cart()
+        "/cart" : (ctx) => Cart(),
+        "/category-product" : (ctx) =>CategoryProduct(),
       },
       home: Home(),
     ),

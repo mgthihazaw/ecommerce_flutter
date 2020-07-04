@@ -29,7 +29,9 @@ class _HomeState extends State<Home> {
      await Provider.of<CategoryProvider>(context,listen: false).fetchData();
      await Provider.of<ProductProvider>(context,listen: false).getProducts();
      await getSliders();
-     _isLoading = false;
+     setState(() {
+       _isLoading = false;
+     });
     }
     _isInit = false;
 

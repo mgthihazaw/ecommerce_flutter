@@ -7,11 +7,15 @@ class Product {
   final bool isHot;
   final bool isNew;
   final int price;
+  final String image;
   Product(
       {this.id,
       this.name,
       this.description,
       this.price,
+      this.image,
       this.isHot,
       this.isNew});
+
+  
 }
