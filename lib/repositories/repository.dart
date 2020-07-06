@@ -16,10 +16,15 @@ class Repository{
     // print("FF");
   }
 
+ Future getLocal(String table) async {
+    var db = await DBConnection.initDB();
+    return await db.query(table);
+ }
 
   Future saveLocal(String table,Map data) async{
 
     var db = await DBConnection.initDB();
+    // await db.rawQuery('DELETE  FROM $table');
     
     return await db.insert(table, data,conflictAlgorithm: sql.ConflictAlgorithm.replace);
 
@@ -41,4 +46,9 @@ class Repository{
    print(data[0]["COUNT(*)"]);
    return data[0]["COUNT(*)"];
   }
+  removeLocalById(table,id) async{
+    var conn = await DBConnection.initDB();
+    return await conn.rawDelete("DELETE FROM $table WHERE productId = $id");
+  }
+  
 }

@@ -16,6 +16,4 @@ class Product {
       this.image,
       this.isHot,
       this.isNew});
-
-  
 }

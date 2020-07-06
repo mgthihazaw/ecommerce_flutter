@@ -37,5 +37,10 @@ class Cart {
       'productQuantity' : quantity.toString(),
     };
   }
-  
+  // 'productId' 
+  //     'productName' 
+  //     'productPhoto'
+  //     'productPrice' 
+  //     'productDiscount' 
+  //     'productQuantity'
 }

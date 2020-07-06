@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:ecommerce/providers/cart-provider.dart';
 import 'package:ecommerce/providers/product-provider.dart';
 import 'package:ecommerce/services/slider-service.dart';
 import 'package:provider/provider.dart';
@@ -23,25 +24,26 @@ class _HomeState extends State<Home> {
   var _sliders;
 
   @override
-  void didChangeDependencies() async{
+  void didChangeDependencies() async {
     if (_isInit) {
-      _isLoading= true;
-     await Provider.of<CategoryProvider>(context,listen: false).fetchData();
-     await Provider.of<ProductProvider>(context,listen: false).getProducts();
-     await getSliders();
-     setState(() {
-       _isLoading = false;
-     });
+      _isLoading = true;
+      await Provider.of<CategoryProvider>(context, listen: false).fetchData();
+      await Provider.of<ProductProvider>(context, listen: false).getProducts();
+      await Provider.of<CartProvider>(context, listen: false).countCart();
+      await getSliders();
+      setState(() {
+        _isLoading = false;
+      });
     }
     _isInit = false;
 
     super.didChangeDependencies();
   }
 
-  Future<void> getSliders() async{
-   var response =await _sliderService.getSlider();
-   var data = json.decode(response.body);
-   _sliders = data["data"];
+  Future<void> getSliders() async {
+    var response = await _sliderService.getSlider();
+    var data = json.decode(response.body);
+    _sliders = data["data"];
   }
 
   @override
@@ -55,17 +57,43 @@ class _HomeState extends State<Home> {
             icon: Icon(Icons.search),
             onPressed: () {},
           ),
-          IconButton(
-            icon: Icon(Icons.shopping_cart),
-            onPressed: () {
-              Navigator.of(context).pushNamed("/cart");
-            },
-            color: Theme.of(context).accentColor,
-          )
+          Stack(
+            children: <Widget>[
+              IconButton(
+                icon: Icon(Icons.shopping_cart),
+                onPressed: () {
+                  Navigator.of(context).pushNamed("/cart");
+                },
+                color: Theme.of(context).accentColor,
+              ),
+              Positioned(
+                top: 2,
+                left: 2,
+                child: Container(
+                  width: 15,
+                  height: 15,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(50),
+                    color: Theme.of(context).accentColor.withOpacity(0.8),
+                  ),
+                  child: Center(
+                      child: FittedBox(
+                          child: Consumer<CartProvider>(
+                    builder: (ctx, cart, ch) => Text(
+                      _isLoading ? "0" : "${cart.count}",
+                      style: TextStyle(fontSize: 12),
+                    ),
+                  ))),
+                ),
+              )
+            ],
+          ),
         ],
       ),
       drawer: AppDrawer(),
-      body: _isLoading ? Center(child: CircularProgressIndicator()): ListView(
+      body: _isLoading
+          ? Center(child: CircularProgressIndicator())
+          : ListView(
               children: <Widget>[
                 Carousel(_sliders),
                 Category(),
