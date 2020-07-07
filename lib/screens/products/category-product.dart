@@ -2,10 +2,41 @@ import 'package:ecommerce/providers/product-provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class CategoryProduct extends StatelessWidget {
+class CategoryProduct extends StatefulWidget {
+  @override
+  _CategoryProductState createState() => _CategoryProductState();
+}
+
+class _CategoryProductState extends State<CategoryProduct> {
+  ScrollController _scroll = ScrollController();
+  bool _scrollLoading = false;
+  var category;
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    Provider.of<ProductProvider>(context, listen: false).clear();
+    _scroll.addListener(() async{
+      if (_scroll.position.pixels == _scroll.position.maxScrollExtent) {
+        print("network call");
+       await Provider.of<ProductProvider>(context, listen: false)
+            .fetchProductsByCategory(category["id"]);
+       
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    _scroll.dispose();
+    
+  }
+
   @override
   Widget build(BuildContext context) {
-    var category = ModalRoute.of(context).settings.arguments as Map;
+    category = ModalRoute.of(context).settings.arguments as Map;
     // Provider.of<ProductProvider>(context,listen:false).fetchProductsByCategory(category["id"]);
     return Scaffold(
       appBar: AppBar(
@@ -25,12 +56,14 @@ class CategoryProduct extends StatelessWidget {
                     : GridView.builder(
                         padding: EdgeInsets.all(10),
                         itemCount: products.categoryProducts.length,
+                        controller: _scroll,
                         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                             crossAxisCount: 2,
                             mainAxisSpacing: 4,
                             crossAxisSpacing: 4,
                             childAspectRatio: 7 / 8),
                         itemBuilder: (context, index) {
+                          
                           return InkWell(
                             child: Card(
                               // color: Theme.of(context).primaryColor,

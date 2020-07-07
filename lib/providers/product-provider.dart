@@ -6,7 +6,9 @@ import '../services/product-service.dart';
 class ProductProvider with ChangeNotifier {
   ProductService _productService;
   List<model.Product> _products;
-  List<model.Product> _catProducts;
+  List<model.Product> _catProducts =[];
+  Map _catProductsPage;
+  
 
   ProductProvider() {
     _productService = new ProductService();
@@ -27,16 +29,23 @@ class ProductProvider with ChangeNotifier {
   }
 
   Future<void> fetchProductsByCategory(id) async {
-    var response = await _productService.getProductByCategory(id);
+   var page =_catProductsPage==null ? 0 : _catProductsPage['current_page'] ;
+   var lastPage =_catProductsPage==null ? 1 : _catProductsPage['last_page'] ;
+  if(page == lastPage){
+    return;
+  }
+    var response = await _productService.getProductByCategory(id,page+1);
     var data = json.decode(response.body);
-    _catProducts = _createProductList(data);
+    _catProductsPage =data["meta"];
+    print(_catProductsPage['current_page']);
+    _catProducts.addAll(_createProductList(data));
     notifyListeners();
   }
 
 
 ///***************** Getters **************************/
   List<model.Product> get products {
-    return [...this._products];
+    return _products== null ? [] :[...this._products];
   }
 
   List<model.Product> get categoryProducts {
@@ -48,6 +57,7 @@ class ProductProvider with ChangeNotifier {
   List<model.Product> _createProductList(Map data) {
     List<model.Product> list = [];
     List productData = data["data"];
+    
     productData.forEach((item) {
       list.add(model.Product(
           id: item["id"],
@@ -60,5 +70,11 @@ class ProductProvider with ChangeNotifier {
     });
 
     return list;
+  }
+
+  clear() async{
+   _catProductsPage = null;
+   _catProducts = [];
+
   }
 }

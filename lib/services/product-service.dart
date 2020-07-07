@@ -9,7 +9,7 @@ class ProductService{
     return  _repository.get("/products");
   }
 
-  Future getProductByCategory(id){
-    return  _repository.get("/category/$id/products");
+  Future getProductByCategory(id,page){
+    return  _repository.get("/category/$id/products?page=$page");
   }
 }
